@@ -19,7 +19,7 @@ defmodule OffBroadway.Imps.MixProject do
 
   defp deps do
     [
-      {:broadway, "~> 0.5.0"},
+      {:broadway, github: "plataformatec/broadway"},
       {:ex_doc, "~> 0.21", only: :docs}
     ]
   end
