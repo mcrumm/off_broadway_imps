@@ -10,20 +10,21 @@ defmodule OffBroadway.Imps.OnCallProducer do
   Messages will be enqueued in this pipeline until there is
   consumer demand.
   """
-  use GenStage
+  use OffBroadway.Imps.InMemoryProducer
   import OffBroadway.Imps.QueueHelpers
+  alias OffBroadway.Imps.InMemoryProducer
 
-  @impl GenStage
-  def init(_opts) do
-    {:producer,
+  @impl InMemoryProducer
+  def init_producer(_opts) do
+    {:ok,
      %{
        queue: :queue.new(),
        demand: 0
      }}
   end
 
-  @impl GenStage
-  def handle_call({InMemoryProducer, :enqueue, messages}, _from, state) do
+  @impl InMemoryProducer
+  def handle_messages(messages, _from, state) do
     %{demand: demand, queue: queue} = state
 
     # TODO: limit the queue size

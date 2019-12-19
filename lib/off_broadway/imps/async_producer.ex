@@ -2,17 +2,11 @@ defmodule OffBroadway.Imps.AsyncProducer do
   @moduledoc """
   A fully asynchronous producer.
   """
-  use GenStage
+  use OffBroadway.Imps.InMemoryProducer, async: true
+  alias OffBroadway.Imps.InMemoryProducer
 
-  @impl GenStage
-  def init(_opts) do
-    {:producer, :ok}
-  end
-
-  @impl GenStage
-  def handle_cast({InMemoryProducer, :enqueue, messages}, state) do
-    {:noreply, messages, state}
-  end
+  @impl InMemoryProducer
+  def init_producer(_opts), do: {:ok, nil}
 
   @impl GenStage
   def handle_demand(_demand, state) do
