@@ -1,6 +1,7 @@
 defmodule OffBroadway.Imps.OnCallProducerTest do
   use ExUnit.Case, async: true
 
+  alias OffBroadway.Imps.InMemoryProducer
   alias OffBroadway.Imps.OnCallProducer
   alias Broadway.CallerAcknowledger
   alias Broadway.Message
